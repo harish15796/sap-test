@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:sap="http://www.mulesoft.org/schema/mule/sap" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4ed09d18-e74e-40fd-8709-99dce5ea144b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<sap:sap-config name="SAP_Config" doc:name="SAP Config" doc:id="63b3594f-a718-42d6-b0ac-b71e06f1c7b4" >
+		<sap:simple-connection-provider-connection username="MULEUSER" password="Welcome@123" systemNumber="00" client="500" applicationServerHost="sqs6ci.isidc.com" />
+	</sap:sap-config>
+	<flow name="sap-testFlow" doc:id="3c179462-1ff5-4b7e-b1b3-1bf35c938dcb" >
+		<http:listener doc:name="Listener" doc:id="f64abffc-e9f5-467b-8a74-0681ed6f0c67" config-ref="HTTP_Listener_config" path="/sap"/>
+		<ee:transform doc:name="Transform Message" doc:id="8a857ecd-7aab-430d-bd80-72ed5e2a1386" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	YHDS_GET_BUILDERS: {
+		"import": {
+			IV_CHANGE_DATE: {
+				DATE_FROM: '2020-01-01'
+			}
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<sap:sync-rfc key="Get Builder for HDS (YHDS_GET_BUILDERS)" doc:name="Synchronous Remote Function Call" doc:id="cb00048b-5670-4666-886d-56b6f3b03f0c" config-ref="SAP_Config"/>
+		<ee:transform doc:name="Transform Message" doc:id="bb7b2947-b2cc-4f2c-8909-4499e36eafa3" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
