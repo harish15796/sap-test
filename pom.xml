@@ -14,7 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.2.2</app.runtime>
-		<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
+		<mule.maven.plugin.version>3.3.1</mule.maven.plugin.version>
 	</properties>
 
 	<build>
@@ -39,6 +39,20 @@
                             <artifactId>libsapjco3</artifactId>
                         </sharedLibrary>
                     </sharedLibraries>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>4.2.2</muleVersion>
+						<username>1-mar</username>
+						<password>Password@1</password>
+						<businessGroup>Apisero</businessGroup>
+						<workerType>SMALL</workerType>
+						<region>us-west-1</region>
+						<environment>Sandbox</environment>
+						<applicationName>sap-poc1</applicationName>
+						<properties>
+							<anypoint.platform.config.analytics.agent.enabled>true</anypoint.platform.config.analytics.agent.enabled>
+						</properties>
+					</cloudHubDeployment>
                 </configuration>
 			</plugin>
 		</plugins>
