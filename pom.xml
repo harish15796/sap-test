@@ -39,20 +39,6 @@
                             <artifactId>libsapjco3</artifactId>
                         </sharedLibrary>
                     </sharedLibraries>
-                    <cloudHubDeployment>
-                        <uri>https://anypoint.mulesoft.com</uri>
-                        <muleVersion>4.2.2</muleVersion>
-                        <username>1-mar</username>
-                        <password>Password@1</password>
-                        <applicationName>sap-test-march-2020</applicationName>
-                        <environment>Sandbox</environment>
-                        <businessGroup>Apisero</businessGroup>
-                        <region>ap-southeast-2</region>
-                        <workers>1</workers>
-                        <workerType>Small</workerType>
-                        <objectStoreV2>true</objectStoreV2>
-                    </cloudHubDeployment>
-                    
                 </configuration>
 			</plugin>
 		</plugins>
@@ -80,17 +66,23 @@
     	<dependency>
             <groupId>com.sap.conn.idoc</groupId>
             <artifactId>com.sap.conn.idoc.sapidoc3</artifactId>
-            <version>3.0.18</version>
+            <version>3.x.x</version>
+			<scope>system</scope>
+            <systemPath>${basedir}/sapidoc3.jar</systemPath>
         </dependency>
     	<dependency>
             <groupId>com.sap.conn.jco</groupId>
             <artifactId>com.sap.conn.jco.sapjco3</artifactId>
-            <version>3.0.18</version>
+            <version>3.x.x</version>
+			<scope>system</scope>
+            <systemPath>${basedir}/sapjco3.jar</systemPath>
         </dependency>
     	<dependency>
             <groupId>com.sap.conn.jco</groupId>
             <artifactId>libsapjco3</artifactId>
-            <version>3.0.18</version>
+            <version>3.x.x</version>
+			<scope>system</scope>
+            <systemPath>${basedir}/libsapjco3.so</systemPath>
             <classifier>external-library</classifier>
             <type>so</type>
         </dependency>
