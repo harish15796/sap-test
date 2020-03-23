@@ -1,0 +1,7 @@
+sap:
+  usernamer: MULEUSER
+  password: Welcome@123
+  sytemnumber: 00
+  clientid: 500
+  host: sqs6ci.isidc.com
+  

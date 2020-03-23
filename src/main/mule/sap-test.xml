@@ -10,8 +10,9 @@ http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<sap:sap-config name="SAP_Config" doc:name="SAP Config" doc:id="5c5c247c-1176-4ec3-b57d-8a5d5c3273c6" >
-		<sap:simple-connection-provider-connection username="MULEUSER" password="Welcome@123" systemNumber="00" client="500" applicationServerHost="sqs6ci.isidc.com" />
+		<sap:simple-connection-provider-connection username="${sap.username}" password="${sap.password}" systemNumber="${sap.sytemnumber}" client="${sap.clientid}" applicationServerHost="${sap.host}" />
 	</sap:sap-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="05255912-4884-498f-b573-a53c28ad46b4" file="config\config-local.yaml" />
 	<flow name="sap-testFlow" doc:id="5daf0e8c-1010-4e0f-a7fa-68b1b3d1df35" >
 		<http:listener doc:name="Listener" doc:id="2688d226-60e8-4511-9714-849e4745818f" config-ref="HTTP_Listener_config" path="/test"/>
 		<ee:transform doc:name="Transform Message" doc:id="9bbac354-42c8-4a1d-8b26-b4175e70b458" >
